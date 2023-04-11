@@ -15,9 +15,17 @@ public class Player : MonoBehaviour
     public float DecelSpeed = 0.98f;
 
     public float RotateSpeed = 0.4f;
+    public float MaxRotateSpeed = 2f;
     public float RotateDecelSpeed = 0.9f;
+
+    public GameObject Bullet;
+    public Transform BulletSpawnPosition;
+
+    public ParticleSystem BackExhaustParticleSystem;
+    public ParticleSystem RightExhaustParticleSystem;
+    public ParticleSystem LeftExhaustParticleSystem;
     
-    public Rigidbody2D _rigidbody2D;
+    Rigidbody2D _rigidbody2D;
     Renderer[] renderers;
     
     // Start is called before the first frame update
@@ -32,24 +40,58 @@ public class Player : MonoBehaviour
     {
         if (_rigidbody2D == null)
             return;
-
-        if (Input.GetAxis("Horizontal") != 0)
+        
+        if(Input.GetAxis("Horizontal") > 0 && !RightExhaustParticleSystem.isPlaying )
+            RightExhaustParticleSystem.Play(true);
+        else if (Input.GetAxis("Horizontal") <= 0 && RightExhaustParticleSystem.isPlaying )
+        { 
+            RightExhaustParticleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            
+        }
+            
+        if(Input.GetAxis("Horizontal") < 0 && !LeftExhaustParticleSystem.isPlaying )
+            LeftExhaustParticleSystem.Play(true);
+        else if(Input.GetAxis("Horizontal") >= 0 && LeftExhaustParticleSystem.isPlaying)
+        { 
+            LeftExhaustParticleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
+        
+        if(Input.GetAxis("Vertical") > 0 && !BackExhaustParticleSystem.isPlaying)
+            BackExhaustParticleSystem.Play(true);
+        else if (Input.GetAxis("Vertical") <= 0 && BackExhaustParticleSystem.isPlaying)
+        {
+                BackExhaustParticleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
+        
+        if (Input.GetAxis("Horizontal") != 0 && (_rigidbody2D.angularVelocity < MaxRotateSpeed && _rigidbody2D.angularVelocity > -MaxRotateSpeed))
         {
             _rigidbody2D.AddTorque( ((Input.GetAxis("Horizontal") * RotateSpeed) * -1 ));
         }
         else
         {
+
             _rigidbody2D.angularVelocity *= RotateDecelSpeed;
         }
         
         if (Input.GetAxis("Vertical") > 0  && _rigidbody2D.velocity.magnitude < MaxSpeed)
         {
+            // BackExhaustParticleSystem.gameObject.SetActive(true);
             _rigidbody2D.AddForce( transform.up  * (Speed * Time.deltaTime));
         }
         else
         {
+
+            // BackExhaustParticleSystem.gameObject.SetActive(false);
+
+
             _rigidbody2D.velocity *= DecelSpeed;
             
+        }
+
+        if (Input.GetButtonDown("Fire"))
+        {
+            Instantiate(Bullet, BulletSpawnPosition.position, BulletSpawnPosition.rotation);
+            Debug.Log("shoot");
         }
         
         if (transform.position.y > TopBoundary )
