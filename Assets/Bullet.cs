@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
         if (col.gameObject.CompareTag("Player"))
             return;
         
-        col.SendMessage("Damage");
+        col.SendMessage("Damage",SendMessageOptions.DontRequireReceiver);
         
         Destroy(gameObject);
     }

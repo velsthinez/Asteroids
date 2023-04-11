@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     public ParticleSystem BackExhaustParticleSystem;
     public ParticleSystem RightExhaustParticleSystem;
     public ParticleSystem LeftExhaustParticleSystem;
+
+    public GameObject DeathParticles;
     
     Rigidbody2D _rigidbody2D;
     Renderer[] renderers;
@@ -146,6 +148,12 @@ public class Player : MonoBehaviour
 
         return false;
 
+    }
+    
+    void Damage()
+    {
+        Instantiate(DeathParticles, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 
 }

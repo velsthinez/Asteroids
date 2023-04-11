@@ -14568,8 +14568,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TopBoundary: 5.5
   BotBoundary: -5.5
-  LeftBoundary: -9
-  RightBoundary: 9
+  LeftBoundary: -8.5
+  RightBoundary: 8.5
   Buffer: 0.5
   Speed: 350
   MaxSpeed: 5
@@ -14582,6 +14582,8 @@ MonoBehaviour:
   BackExhaustParticleSystem: {fileID: 582782453}
   RightExhaustParticleSystem: {fileID: 1494519028}
   LeftExhaustParticleSystem: {fileID: 1271680350}
+  DeathParticles: {fileID: 1968470785794465326, guid: 05fe9c777aec6ba47ba5e1490945d42d,
+    type: 3}
 --- !u!1 &4400785373363529389
 GameObject:
   m_ObjectHideFlags: 0
