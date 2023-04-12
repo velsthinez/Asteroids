@@ -142,3 +142,4 @@ MonoBehaviour:
   DeathParticles: {fileID: 1968470785794465326, guid: 05fe9c777aec6ba47ba5e1490945d42d,
     type: 3}
   Health: 1
+  Score: 200

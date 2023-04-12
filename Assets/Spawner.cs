@@ -21,6 +21,8 @@ public class Spawner : MonoBehaviour
     public float MaxSpawnCooldown = 2f;
 
     public float _spawnTimer = 0f;
+
+    public ScorePanel ScorePanel;
     
     // Update is called once per frame
     void Update()
@@ -34,24 +36,29 @@ public class Spawner : MonoBehaviour
         int randomSpawnPos = Random.Range(0, 3);
 
         int randomIndex = Random.Range(0, Asteroids.Length );
-        
-        
+
+        GameObject go = null;
+        Asteroid asteroid;
+
         switch (randomSpawnPos)
         {
+            
             case (0):
-                Instantiate(Asteroids[randomIndex], Top.position + new Vector3(Random.Range(MinX,MaxX),0), transform.rotation);
+                go = Instantiate(Asteroids[randomIndex], Top.position + new Vector3(Random.Range(MinX,MaxX),0), transform.rotation);
                 break;
             case (1):
-                Instantiate(Asteroids[randomIndex], Bot.position + new Vector3(Random.Range(MinX,MaxX),0), transform.rotation);
+                go = Instantiate(Asteroids[randomIndex], Bot.position + new Vector3(Random.Range(MinX,MaxX),0), transform.rotation);
                 break;
             case (2):
-                Instantiate(Asteroids[randomIndex], Left.position + new Vector3(0,Random.Range(MinY,MaxY)), transform.rotation);
+                go = Instantiate(Asteroids[randomIndex], Left.position + new Vector3(0,Random.Range(MinY,MaxY)), transform.rotation);
                 break;
             case (3):
-                Instantiate(Asteroids[randomIndex], Right.position + new Vector3(0,Random.Range(MinY,MaxY)), transform.rotation);
+                go = Instantiate(Asteroids[randomIndex], Right.position + new Vector3(0,Random.Range(MinY,MaxY)), transform.rotation);
                 break;
         }
 
+        asteroid = go.GetComponent<Asteroid>();
+        asteroid.SetupScorePanel(ScorePanel);
 
         _spawnTimer = Random.Range(MinSpawnCooldown, MaxSpawnCooldown);
     }

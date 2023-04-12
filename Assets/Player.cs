@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public float Buffer = 0.5f;
 
     public float Speed = 10f;
+    public float BackpedalSpeed = 5f;
+    public float SidewaySpeed = 5f;
     public float MaxSpeed = 20f;
     public float DecelSpeed = 0.98f;
 
@@ -22,8 +24,11 @@ public class Player : MonoBehaviour
     public Transform BulletSpawnPosition;
 
     public ParticleSystem BackExhaustParticleSystem;
+    public ParticleSystem FrontExhaustParticleSystem;
     public ParticleSystem RightExhaustParticleSystem;
     public ParticleSystem LeftExhaustParticleSystem;
+    public ParticleSystem SidewayRightExhaustParticleSystem;
+    public ParticleSystem SidewayLeftExhaustParticleSystem;
 
     public GameObject DeathParticles;
     
@@ -43,6 +48,21 @@ public class Player : MonoBehaviour
         if (_rigidbody2D == null)
             return;
         
+        if(Input.GetAxis("Sideways") < 0 && !SidewayRightExhaustParticleSystem.isPlaying )
+            SidewayRightExhaustParticleSystem.Play(true);
+        else if (Input.GetAxis("Sideways") >= 0 && SidewayRightExhaustParticleSystem.isPlaying )
+        { 
+            SidewayRightExhaustParticleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            
+        }
+            
+        if(Input.GetAxis("Sideways") > 0 && !SidewayLeftExhaustParticleSystem.isPlaying )
+            SidewayLeftExhaustParticleSystem.Play(true);
+        else if(Input.GetAxis("Sideways") <= 0 && SidewayLeftExhaustParticleSystem.isPlaying)
+        { 
+            SidewayLeftExhaustParticleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
+        
         if(Input.GetAxis("Horizontal") > 0 && !RightExhaustParticleSystem.isPlaying )
             RightExhaustParticleSystem.Play(true);
         else if (Input.GetAxis("Horizontal") <= 0 && RightExhaustParticleSystem.isPlaying )
@@ -60,9 +80,17 @@ public class Player : MonoBehaviour
         
         if(Input.GetAxis("Vertical") > 0 && !BackExhaustParticleSystem.isPlaying)
             BackExhaustParticleSystem.Play(true);
-        else if (Input.GetAxis("Vertical") <= 0 && BackExhaustParticleSystem.isPlaying)
+        else if (Input.GetAxis("Vertical") < 0 && !FrontExhaustParticleSystem.isPlaying)
         {
+            FrontExhaustParticleSystem.Play(true);
+        }
+        else if (Input.GetAxis("Vertical") == 0 )
+        {
+            if(BackExhaustParticleSystem.isPlaying)
                 BackExhaustParticleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            
+            if(FrontExhaustParticleSystem.isPlaying)
+                FrontExhaustParticleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         }
         
         if (Input.GetAxis("Horizontal") != 0 && (_rigidbody2D.angularVelocity < MaxRotateSpeed && _rigidbody2D.angularVelocity > -MaxRotateSpeed))
@@ -74,11 +102,21 @@ public class Player : MonoBehaviour
 
             _rigidbody2D.angularVelocity *= RotateDecelSpeed;
         }
+
+        if (Input.GetAxis("Sideways") != 0 && _rigidbody2D.velocity.magnitude < MaxSpeed)
+        {
+            _rigidbody2D.AddForce( transform.right * (Input.GetAxis("Sideways") * (SidewaySpeed * Time.deltaTime)));
+        }
         
         if (Input.GetAxis("Vertical") > 0  && _rigidbody2D.velocity.magnitude < MaxSpeed)
         {
             // BackExhaustParticleSystem.gameObject.SetActive(true);
             _rigidbody2D.AddForce( transform.up  * (Speed * Time.deltaTime));
+        }
+        else if (Input.GetAxis("Vertical") < 0 && _rigidbody2D.velocity.magnitude < MaxSpeed)
+        {
+            _rigidbody2D.AddForce( -transform.up  * (BackpedalSpeed * Time.deltaTime));
+
         }
         else
         {
