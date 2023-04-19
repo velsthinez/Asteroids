@@ -23,10 +23,17 @@ public class Spawner : MonoBehaviour
     public float _spawnTimer = 0f;
 
     public ScorePanel ScorePanel;
+
+    public GameManager GameManager;
     
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.State != GameManager.GameState.Started)
+        {
+            return;
+        }
+        
         if (_spawnTimer > 0)
         {
             _spawnTimer -= Time.deltaTime;

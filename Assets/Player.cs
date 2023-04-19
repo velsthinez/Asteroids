@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
     public ParticleSystem SidewayLeftExhaustParticleSystem;
 
     public GameObject DeathParticles;
+
+    public GameManager GameManager;
     
     Rigidbody2D _rigidbody2D;
     Renderer[] renderers;
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManager = FindObjectOfType<GameManager>();
         renderers = gameObject.GetComponentsInChildren<Renderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
@@ -191,6 +194,7 @@ public class Player : MonoBehaviour
     void Damage()
     {
         Instantiate(DeathParticles, transform.position, transform.rotation);
+        GameManager.State = GameManager.GameState.End;
         Destroy(gameObject);
     }
 
