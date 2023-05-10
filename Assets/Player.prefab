@@ -38645,6 +38645,8 @@ MonoBehaviour:
   MaxRotateSpeed: 250
   RotateDecelSpeed: 0.99
   Bullet: {fileID: 7403558524606383178, guid: 84082d0e6ab156247b6876e9ef4e2180, type: 3}
+  BulletSound: {fileID: 2602775869840717864, guid: 0dbba2e91ae3c314b9f0a495ef3b98cd,
+    type: 3}
   BulletSpawnPosition: {fileID: 1274735563}
   BackExhaustParticleSystem: {fileID: 582782453}
   FrontExhaustParticleSystem: {fileID: 596276249}
@@ -38654,6 +38656,9 @@ MonoBehaviour:
   SidewayLeftExhaustParticleSystem: {fileID: 2057043595}
   DeathParticles: {fileID: 1968470785794465326, guid: 05fe9c777aec6ba47ba5e1490945d42d,
     type: 3}
+  DeathSound: {fileID: 2602775869840717864, guid: 557852a3673733346abcd30312da4481,
+    type: 3}
+  GameManager: {fileID: 0}
 --- !u!1 &4400785373363529389
 GameObject:
   m_ObjectHideFlags: 0

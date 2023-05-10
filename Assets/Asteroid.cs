@@ -10,13 +10,14 @@ public class Asteroid : MonoBehaviour
     public float MaxForce = 10f;
 
     public GameObject DeathParticles;
-    
+    public GameObject DeathSound;
+
     public int Health = 1;
     public int Score = 100;
     private Rigidbody2D _rigidbody;
 
     protected ScorePanel _scorePanel;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,7 @@ public class Asteroid : MonoBehaviour
         Debug.Log(randomForce + " " + randomDirection);
         
         _rigidbody.AddForce(randomDirection * randomForce );
+
     }
 
     void Damage()
@@ -38,6 +40,7 @@ public class Asteroid : MonoBehaviour
         if (Health <= 0)
         {
             Instantiate(DeathParticles, transform.position, transform.rotation);
+            Instantiate(DeathSound, transform.position, transform.rotation);
             _scorePanel.UpdateScore(Score);
             Destroy(gameObject);
         }

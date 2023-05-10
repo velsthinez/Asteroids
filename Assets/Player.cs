@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     public float RotateDecelSpeed = 0.9f;
 
     public GameObject Bullet;
+    public GameObject BulletSound;
+
     public Transform BulletSpawnPosition;
 
     public ParticleSystem BackExhaustParticleSystem;
@@ -31,18 +33,21 @@ public class Player : MonoBehaviour
     public ParticleSystem SidewayLeftExhaustParticleSystem;
 
     public GameObject DeathParticles;
-
+    public GameObject DeathSound;
+    
     public GameManager GameManager;
     
     Rigidbody2D _rigidbody2D;
     Renderer[] renderers;
     
+
     // Start is called before the first frame update
     void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
         renderers = gameObject.GetComponentsInChildren<Renderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
@@ -134,6 +139,7 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Fire"))
         {
             Instantiate(Bullet, BulletSpawnPosition.position, BulletSpawnPosition.rotation);
+            Instantiate(BulletSound, BulletSpawnPosition.position, BulletSpawnPosition.rotation);
             Debug.Log("shoot");
         }
         
@@ -194,6 +200,8 @@ public class Player : MonoBehaviour
     void Damage()
     {
         Instantiate(DeathParticles, transform.position, transform.rotation);
+        Instantiate(DeathSound, transform.position, transform.rotation);
+        
         GameManager.State = GameManager.GameState.End;
         Destroy(gameObject);
     }
