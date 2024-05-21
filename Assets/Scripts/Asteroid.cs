@@ -27,7 +27,7 @@ public class Asteroid : MonoBehaviour
         
         Vector2 randomDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
 
-        Debug.Log(randomForce + " " + randomDirection);
+        // Debug.Log(randomForce + " " + randomDirection);
         
         _rigidbody.AddForce(randomDirection * randomForce );
 
