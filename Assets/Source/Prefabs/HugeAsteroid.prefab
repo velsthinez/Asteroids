@@ -141,7 +141,7 @@ MonoBehaviour:
   MaxForce: 100
   DeathParticles: {fileID: 1968470785794465326, guid: 05fe9c777aec6ba47ba5e1490945d42d,
     type: 3}
-  DeathSound: {fileID: 2602775869840717864, guid: ad60de2274c807b44b141eaf10771dc5,
+  DeathSound: {fileID: 2602775869840717864, guid: 475da71dfb0d1524e958a3c3c08f26f4,
     type: 3}
   Health: 3
   Score: 500

@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 1816156174078557919}
   - component: {fileID: -7678919465882432158}
   - component: {fileID: 461348090976456017}
+  - component: {fileID: 7163486743352541455}
+  - component: {fileID: 1130108395111715258}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -168,6 +170,41 @@ MonoBehaviour:
   BulletSound: {fileID: 2602775869840717864, guid: 0dbba2e91ae3c314b9f0a495ef3b98cd,
     type: 3}
   BulletSpawnPosition: {fileID: 1274735563}
+--- !u!114 &7163486743352541455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400785373124920529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcd642485488d4c49a0710f76f3eff9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TopBoundary: 5.5
+  BotBoundary: -5.5
+  LeftBoundary: -8.5
+  RightBoundary: 8.5
+  Buffer: 0.5
+--- !u!114 &1130108395111715258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400785373124920529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74013021bd356914eb57d1ff1e0b41a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameManager: {fileID: 0}
+  CurrentHealth: 1
+  DeathParticles: {fileID: 1968470785794465326, guid: 05fe9c777aec6ba47ba5e1490945d42d,
+    type: 3}
+  DeathSound: {fileID: 2602775869840717864, guid: 557852a3673733346abcd30312da4481,
+    type: 3}
 --- !u!1 &4400785373363529389
 GameObject:
   m_ObjectHideFlags: 0

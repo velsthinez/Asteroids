@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2602775869840717866}
   - component: {fileID: 2602775869840717867}
   m_Layer: 0
-  m_Name: AsteroidDeathSound
+  m_Name: HugeAsteroidDeathSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,8 +45,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c4970548a553bd448a82eee93091c984, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
-  m_Pitch: 0.8
+  m_Volume: 0.5
+  m_Pitch: 0.3
   Loop: 0
   Mute: 0
   Spatialize: 0
